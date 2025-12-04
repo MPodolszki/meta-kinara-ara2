@@ -2,6 +2,11 @@
 
 Yocto meta-layer to integrate Kinara Ara2 SDK on PHYTEC phyBOARD-pollux.
 
+The art folder includes the complete Ara2 SDK v1.3
+You might want to remove this folder for a series product
+For debugging builds you should add art/linux/aarch64/ to your device (home folder)
+This adds specific tools to programm and flash the device und for testing purposes
+
 Currently provides:
 - `kinara-uiodma`: external kernel module build for Ara2 UIO DMA driver
 - `kinara-hwutils`: prebuilt hardware utilities
