@@ -1,0 +1,13 @@
+{
+  "_name_or_path": "KinaraInc/llama2-7b",
+  "ara": {
+    "dvm_path": "models/model.dvm",
+    "inference_device": "ARA2",
+    "interface_ip_address": "127.0.0.1",
+    "interface_named_pipe": "//./pipe/proxy_pipe",
+    "interface_port": 5000,
+    "interface_socket_file": "/var/run/proxy.sock",
+    "interface_type": "SOCKET"
+  },
+  "model_type": "ara_llama"
+}

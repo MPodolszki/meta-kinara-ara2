@@ -1,0 +1,154 @@
+Kinara Runtime Software Content Register
+
+Release: ara2-sdk
+Version: v1.2.1
+Date: July 2025
+Outgoing License: Kinara LICENSE.txt
+Description and comments:   Runtime SDK for Ara-2
+License File: LICENSE.txt
+
+Package:                    proxy
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Utils
+Type of content:            binary
+Description and comments:   Userspace driver and load balancing engine for Kinara devices
+Origin:                     Kinara
+                            benchmark (Version: 1.8.3; Apache 2.0 - https://github.com/google/benchmark/blob/main/)
+                            cli11 (Version: 2.3.3; BSD-Clause 3 - https://github.com/CLIUtils/CLI11/blob/main)
+                            cpp-httplib (Version: 0.12.5; MIT - https://github.com/yhirose/cpp-httplib/blob/master) 
+                            cpp-statsd-client (Version: 1.0.2; MIT - https://github.com/statsd/statsd/blob/master)
+                            cxxopts (Version: 3.1.1; MIT- https://github.com/jarro2783/cxxopts/blob/master)
+                            doxygen_awesome_css (Version: 2.3.1; MIT - https://github.com/jothepro/doxygen-awesome-css/blob/main)
+                            libfort (Version: 0.4.2; MIT - https://github.com/seleznevae/libfort/blob/develop)
+                            libuv (Version: 1.47.1; MIT - https://github.com/libuv/libuv/blob/v1.x)
+                            nlohmann-json (Version: 3.11.2; MIT - https://github.com/nlohmann/json/blob/develop)
+                            pistache (Version: 0.2.4.20231105; Apache 2.0 - https://github.com/pistacheio/pistache/blob/master) 
+                            spdlog (Version: 1.8.5; MIT - https://github.com/gabime/spdlog/blob/v1.x)
+                            xxHash (Version: 0.8.1; BSD Clause 2 - https://github.com/Cyan4973/xxHash/blob/dev)
+                            yaml-cpp (Version: 0.7.0; MIT - https://github.com/jbeder/yaml-cpp/blob/master)
+
+Package:                    nnapp
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Sample Inference Application
+Type of content:            binary
+Description and comments:   Standalone test runner and application for neural model deployment
+Origin:                     Kinara
+                            benchmark (Version: 1.8.3; Apache 2.0 - https://github.com/google/benchmark/blob/main/)
+                            cli11 (Version: 2.3.3; BSD-Clause 3 - https://github.com/CLIUtils/CLI11/blob/main)
+                            cpp-httplib (Version: 0.12.5; MIT - https://github.com/yhirose/cpp-httplib/blob/master) 
+                            cpp-statsd-client (Version: 1.0.2; MIT - https://github.com/statsd/statsd/blob/master)
+                            cxxopts (Version: 3.1.1; MIT- https://github.com/jarro2783/cxxopts/blob/master)
+                            doxygen_awesome_css (Version: 2.3.1; MIT - https://github.com/jothepro/doxygen-awesome-css/blob/main)
+                            libfort (Version: 0.4.2; MIT - https://github.com/seleznevae/libfort/blob/develop)
+                            libuv (Version: 1.47.1; MIT - https://github.com/libuv/libuv/blob/v1.x)
+                            nlohmann-json (Version: 3.11.2; MIT - https://github.com/nlohmann/json/blob/develop)
+                            pistache (Version: 0.2.4.20231105; Apache 2.0 - https://github.com/pistacheio/pistache/blob/master) 
+                            spdlog (Version: 1.8.5; MIT - https://github.com/gabime/spdlog/blob/v1.x)
+                            xxHash (Version: 0.8.1; BSD Clause 2 - https://github.com/Cyan4973/xxHash/blob/dev)
+                            yaml-cpp (Version: 0.7.0; MIT - https://github.com/jbeder/yaml-cpp/blob/master)
+
+Package:                    libaraclient
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           SDK
+Type of content:            static and shared libraries
+Description and comments:   Kinara host interface client SDK
+Origin:                     Kinara
+                            benchmark (Version: 1.8.3; Apache 2.0 - https://github.com/google/benchmark/blob/main/)
+                            cli11 (Version: 2.3.3; BSD-Clause 3 - https://github.com/CLIUtils/CLI11/blob/main)
+                            cpp-httplib (Version: 0.12.5; MIT - https://github.com/yhirose/cpp-httplib/blob/master) 
+                            cpp-statsd-client (Version: 1.0.2; MIT - https://github.com/statsd/statsd/blob/master)
+                            cxxopts (Version: 3.1.1; MIT- https://github.com/jarro2783/cxxopts/blob/master)
+                            doxygen_awesome_css (Version: 2.3.1; MIT - https://github.com/jothepro/doxygen-awesome-css/blob/main)
+                            libfort (Version: 0.4.2; MIT - https://github.com/seleznevae/libfort/blob/develop)
+                            libuv (Version: 1.47.1; MIT - https://github.com/libuv/libuv/blob/v1.x)
+                            nlohmann-json (Version: 3.11.2; MIT - https://github.com/nlohmann/json/blob/develop)
+                            pistache (Version: 0.2.4.20231105; Apache 2.0 - https://github.com/pistacheio/pistache/blob/master) 
+                            spdlog (Version: 1.8.5; MIT - https://github.com/gabime/spdlog/blob/v1.x)
+                            xxHash (Version: 0.8.1; BSD Clause 2 - https://github.com/Cyan4973/xxHash/blob/dev)
+                            yaml-cpp (Version: 0.7.0; MIT - https://github.com/jbeder/yaml-cpp/blob/master)
+
+Package:                    include
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           SDK
+Type of content:            headers
+Description and comments:   Public interface headers (C/C++ and Python bindings)
+Origin:                     Kinara
+
+Package:                    hw_utils
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Utils
+Type of content:            binaries and config
+Description and comments:   Flashing, PLL configuration, and memory init tools
+Origin:                     Kinara
+                            benchmark (Version: 1.8.3; Apache 2.0 - https://github.com/google/benchmark/blob/main/)
+                            cli11 (Version: 2.3.3; BSD-Clause 3 - https://github.com/CLIUtils/CLI11/blob/main)
+                            cpp-httplib (Version: 0.12.5; MIT - https://github.com/yhirose/cpp-httplib/blob/master) 
+                            cpp-statsd-client (Version: 1.0.2; MIT - https://github.com/statsd/statsd/blob/master)
+                            cxxopts (Version: 3.1.1; MIT- https://github.com/jarro2783/cxxopts/blob/master)
+                            doxygen_awesome_css (Version: 2.3.1; MIT - https://github.com/jothepro/doxygen-awesome-css/blob/main)
+                            libfort (Version: 0.4.2; MIT - https://github.com/seleznevae/libfort/blob/develop)
+                            libuv (Version: 1.47.1; MIT - https://github.com/libuv/libuv/blob/v1.x)
+                            nlohmann-json (Version: 3.11.2; MIT - https://github.com/nlohmann/json/blob/develop)
+                            pistache (Version: 0.2.4.20231105; Apache 2.0 - https://github.com/pistacheio/pistache/blob/master) 
+                            spdlog (Version: 1.8.5; MIT - https://github.com/gabime/spdlog/blob/v1.x)
+                            xxHash (Version: 0.8.1; BSD Clause 2 - https://github.com/Cyan4973/xxHash/blob/dev)
+                            yaml-cpp (Version: 0.7.0; MIT - https://github.com/jbeder/yaml-cpp/blob/master)
+
+Package:                    ddr_config
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Config
+Type of content:            binary
+Description and comments:   DDR training config
+Origin:                     Kinara
+                            benchmark (Version: 1.8.3; Apache 2.0 - https://github.com/google/benchmark/blob/main/)
+                            cli11 (Version: 2.3.3; BSD-Clause 3 - https://github.com/CLIUtils/CLI11/blob/main)
+                            cpp-httplib (Version: 0.12.5; MIT - https://github.com/yhirose/cpp-httplib/blob/master) 
+                            cpp-statsd-client (Version: 1.0.2; MIT - https://github.com/statsd/statsd/blob/master)
+                            cxxopts (Version: 3.1.1; MIT- https://github.com/jarro2783/cxxopts/blob/master)
+                            doxygen_awesome_css (Version: 2.3.1; MIT - https://github.com/jothepro/doxygen-awesome-css/blob/main)
+                            libfort (Version: 0.4.2; MIT - https://github.com/seleznevae/libfort/blob/develop)
+                            libuv (Version: 1.47.1; MIT - https://github.com/libuv/libuv/blob/v1.x)
+                            nlohmann-json (Version: 3.11.2; MIT - https://github.com/nlohmann/json/blob/develop)
+                            pistache (Version: 0.2.4.20231105; Apache 2.0 - https://github.com/pistacheio/pistache/blob/master) 
+                            spdlog (Version: 1.8.5; MIT - https://github.com/gabime/spdlog/blob/v1.x)
+                            xxHash (Version: 0.8.1; BSD Clause 2 - https://github.com/Cyan4973/xxHash/blob/dev)
+                            yaml-cpp (Version: 0.7.0; MIT - https://github.com/jbeder/yaml-cpp/blob/master)
+
+Package:                    boot_img_32779
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Firmware
+Type of content:            hex files
+Description and comments:   Boot image firmware for Kinara devices
+Origin:                     Kinara
+                            Rambus Proprietary IP
+
+Package:                    config
+Outgoing License:           Kinara Proprietary
+License File:               ./art/LICENSE.txt
+Package Category:           Configuration
+Type of content:            yaml
+Description and comments:   Sample and reference configuration files for nnapp and proxy
+Origin:                     Kinara
+
+Package:                    uiodma
+Outgoing License:           GPL-2.0 
+License File:               ./art/licenses/GPL-2.0.txt
+Package Category:           Driver
+Type of content:            source
+Description and comments:   Kinara DMA kernel driver using UIO
+Origin:                     Amazon, Inc. (GPL-2.0)
+
+Package:                    uiodma_cache_management
+Outgoing License:           GPL-2.0 
+License File:               ./art/licenses/GPL-2.0.txt
+Package Category:           Driver
+Type of content:            source
+Description and comments:   Variant of uiodma with cache control
+Origin:                     Amazon, Inc. (GPL-2.0)

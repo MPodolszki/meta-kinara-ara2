@@ -1,0 +1,138 @@
+;
+; AraLink.inf - Combined INF for driver + AraProxyService
+;
+
+[Version]
+PnpLockdown=1
+Signature="$WINDOWS NT$"
+Class=AraLink
+ClassGuid={c37d1250-360f-5e41-cca6-650b91beb34c}
+Provider = Kinara Inc.
+CatalogFile=AraLink.cat
+DriverVer = 09/16/2025,1.0.6.6
+
+[DestinationDirs]
+DefaultDestDir = 12
+AraLink_Device_CoInstaller_CopyFiles = 11
+Drivers_Dir = 12
+KinaraBinaries_CopyFiles = 11,Kinara
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+AraLink.sys = 1
+;
+
+AraProxyService.exe = 1
+AraProxyServiceMsgs.dll = 1
+araclient.dll = 1
+kinara-llm.dll = 1
+libusb-1.0.dll = 1
+ddr_cfg_35.bin = 1
+nnp.dram.bin = 1
+nnp.iram.bin = 1
+proxy_config.yaml = 1
+rwcp.dram.bin = 1
+rwcp.iram.bin = 1 
+uv.dll = 1
+hex = 1
+sys_api.hex = 1
+
+;--------------- Class section ---------------
+[ClassInstall32]
+Addreg=AraLinkClassReg
+
+[AraLinkClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-14
+
+;--------------- Install Section ---------------
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%AraLink.DeviceDesc%=AraLink_Device, PCI\VEN_1E58&DEV_0002&REV_02
+
+[AraLink_Device.NTamd64]
+CopyFiles=Drivers_Dir, KinaraBinaries_CopyFiles
+AddReg=AraLink_Device.Reg
+
+[AraLink_Device.Reg]
+
+[Drivers_Dir]
+AraLink.sys
+
+[KinaraBinaries_CopyFiles]
+AraProxyService.exe
+AraProxyServiceMsgs.dll
+araclient.dll
+kinara-llm.dll
+libusb-1.0.dll
+ddr_cfg_35.bin
+nnp.dram.bin
+nnp.iram.bin
+proxy_config.yaml
+rwcp.dram.bin
+rwcp.iram.bin
+uv.dll
+hex
+sys_api.hex
+
+[AraLink_Device.NTamd64.HW]
+AddReg=AraLink_Device.HwReg
+Include=machine.inf
+Needs=PciD3ColdSupported.HW
+
+[AraLink_Device.HwReg]
+HKR,"Interrupt Management",,0x00000010
+HKR,"Interrupt Management\MessageSignaledInterruptProperties",,0x00000010
+HKR,"Interrupt Management\MessageSignaledInterruptProperties",MSISupported,0x00010001,1
+
+;--------------- Service installation ---------------
+[AraLink_Device.NTamd64.Services]
+AddService = AraLink, %SPSVCINST_ASSOCSERVICE%, AraLink_Service_Inst
+AddService = AraProxyService, 0x00000000, AraProxyService_Install
+
+; -------------- AraLink driver install sections ---------------
+[AraLink_Service_Inst]
+DisplayName    = %AraLink.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\AraLink.sys
+
+;--------------- AraLink_Device Coinstaller installation ---------------
+[AraProxyService_Install]
+DisplayName   = "Ara Proxy Service"
+Description   = "This service offers facility for the client apps to run their AI inferences on an Ara AI accelerator."
+ServiceType   = 0x10            ; SERVICE_WIN32_OWN_PROCESS
+StartType     = 2               ; SERVICE_AUTO_START
+ErrorControl  = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary = "%11%\Kinara\AraProxyService.exe"
+
+[AraLink_Device.NTamd64.CoInstallers]
+AddReg=AraLink_Device_CoInstaller_AddReg
+CopyFiles=AraLink_Device_CoInstaller_CopyFiles
+
+[AraLink_Device_CoInstaller_AddReg]
+;
+
+
+[AraLink_Device_CoInstaller_CopyFiles]
+;
+
+
+[AraLink_Device.NTamd64.Wdf]
+KmdfService = AraLink, AraLink_wdfsect
+
+[AraLink_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="Kinara Inc."
+ClassName="Kinara Accelerator Devices"
+DiskName = "AraLink Installation Disk"
+AraLink.DeviceDesc = "Ara2 PCIe Accelerator"
+AraLink.SVCDESC = "AraLink Service"

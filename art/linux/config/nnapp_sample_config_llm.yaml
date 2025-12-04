@@ -1,0 +1,39 @@
+nnapp:
+  connection:
+    ip: 127.0.0.1
+    port: 5000
+    shm_mem_file_path: ''
+    shm_mem_size: 256
+    sock_file: ''
+    type: tcp
+  log:
+    dump_path:
+  mode:
+    infer:
+      llm:
+        models:
+          '0':
+            batch_size: 5
+            bos_token_id: 1
+            eof_token_id: 2
+            ep_list:
+            - all
+            iterations: 1
+            llm_input_path:
+            llm_model_path:
+            llm_output_path: ''
+            name: llama
+            pad_token_id: 2
+            prompt_post_on_mcp: false
+            prompt_pre_on_mcp: false
+            token_post_on_mcp: false
+            token_pre_on_mcp: false
+            tokenizer_path:
+        run_once_and_for_all: false
+        utilisation_stats: false
+      type: llm
+    type: infer
+  stats:
+    device_stats: false
+    host_stats: false
+    infer_stats: 0

@@ -1,0 +1,41 @@
+nnapp:
+  connection:
+    ip: 127.0.0.1
+    port: 5000
+    shm_mem_file_path: ''
+    shm_mem_size: 256
+    sock_file: ''
+    named_pipe_path: "\\\\.\\pipe\\proxy_pipe"
+    type: named_pipe
+  log:
+    dump_path: ''
+  mode:
+    infer:
+      llm:
+        models:
+          '0':
+            ep_list:
+            - all
+            input_path: ''
+            iterations: 10
+            batch_size: 1
+            name: llama
+            output_path: ''
+            path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\dbg2.dvm
+            #path: /users/amit/bringup/misc_testing_dbg/llm/proxy_porting/fullsetup/modelfile
+            embeddings_path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\embedded_wts.dat
+            vocab_path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\vocab.json
+            merges_path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\merges.txt
+            llm_input_path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\input_add.txt
+            llm_output_path: C:\Users\labuser\Desktop\ara2-sdk-b0-3.6-win-10june\art\x86\nnapp\output_add.txt
+            num_embeddings_per_token: 4096
+            eos_token_id: 151643
+            max_token_number: 256
+            embedding_vocab_size: 151936
+        run_once_and_for_all: false
+      type: llm
+    type: infer
+  stats:
+    device_stats: false
+    host_stats: false
+    infer_stats: 0
