@@ -1,0 +1,10 @@
+[Unit]
+Description=Bind uiodma driver to Kinara PCIe device
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=sh /root/aarch64/hw_utils/startBoot.sh
+
+[Install]
+WantedBy=multi-user.target
