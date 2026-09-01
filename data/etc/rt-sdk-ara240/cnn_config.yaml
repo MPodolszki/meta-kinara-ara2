@@ -1,0 +1,41 @@
+---
+# Read /usr/share/rt-sdk-ara240/config/nnapp_config.yaml
+# For a full configuration example.
+nnapp:
+  connection:
+    ip: 127.0.0.1
+    port: 5000
+    shm_mem_file_path: /dev/nnapp.shm
+    shm_mem_size: 256
+    sock_file: "/var/run/proxy.sock"
+    # type: tcp
+    type: unix
+  log:
+    # dump_path: ""
+    max_error_count: 0
+  mode:
+    infer:
+      async:
+        dump_only_errors: false
+        utilization_stats: False
+        # dump outputs with timestamp
+        dump_with_timestamp: False
+        models:
+          "0":
+            ep_list:
+              - all
+            golden_output_path: ""
+            input_path: ""
+            iterations: 1000
+            batch_size: 1
+            name: ""
+            output_path: ""
+            path: ""
+        run_once_and_for_all: false
+        utilisation_stats: false
+      type: async
+    type: infer
+  stats:
+    device_stats: false
+    host_stats: false
+    infer_stats: 0

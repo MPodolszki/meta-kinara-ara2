@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+# Copyright 2026 NXP
+
+# NXP Proprietary. This software is owned or controlled by NXP and may only be
+# used strictly in accordance with the applicable license terms. By expressly
+# accepting such terms or by downloading, installing, activating and/or
+# otherwise using the software, you are agreeing that you have read, and that
+# you agree to comply with and are bound by, such license terms. If you do not
+# agree to be bound by the applicable license terms, then you may not retain,
+# install, activate or otherwise use the software.
+
+import subprocess
+import sys
+
+if __name__ == "__main__":
+    cmd = [
+        "uvx",
+        "--no-cache",
+        "-qq",
+        "--from",
+        "/usr/share/python-wheels/fetch_models-1.0.0-py3-none-any.whl",
+        "fetch_models"
+    ] + sys.argv[1:]
+    
+    try:
+        subprocess.run(cmd)
+    except FileNotFoundError:
+        print("Please be sure you have 'uv' and 'uvx' install")
+

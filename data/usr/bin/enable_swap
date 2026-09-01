@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+# Copyright 2025-2026 NXP
+#
+# NXP Proprietary. This software is owned or controlled by NXP and may only be
+# used strictly in accordance with the applicable license terms. By expressly
+# accepting such terms or by downloading, installing, activating and/or
+# otherwise using the software, you are agreeing that you have read, and that
+# you agree to comply with and are bound by, such license terms. If you do not
+# agree to be bound by the applicable license terms, then you may not retain,
+# install, activate or otherwise use the software.
+
+# Check for Amount of memory in Gb
+if [[ $# -ne 1 || ! "$1" =~ ^[0-9]+$ ]]; then
+	echo "Usage: $0 <SIZE_IN_GB>"
+	echo "Example: $0 2"
+	exit 1
+fi
+
+SWAPFILE="/swapfile"
+SIZE_GB="$1"
+SIZE="${SIZE_GB}G"
+
+echo "Checking for existing swap..."
+
+# Check if swap is already enabled
+if swapon --show | grep -q "$SWAPFILE"; then
+	echo "Swap is already enabled at $SWAPFILE. Reconfiguring..."
+	sudo swapoff $SWAPFILE
+	sudo rm -f $SWAPFILE
+elif swapon --show | grep -q "^/"; then
+	echo "Another swap file or partition is active. Disabling it..."
+	CURRENT_SWAP=$(swapon --show | awk 'NR==2 {print $1}')
+	sudo swapoff "$CURRENT_SWAP"
+	sudo sed -i "\|$CURRENT_SWAP|d" /etc/fstab
+fi
+
+echo "Creating new swap file of size ${SIZE_GB}G ..."
+
+# Create the swap file
+sudo fallocate -l $SIZE $SWAPFILE || sudo dd if=/dev/zero of=$SWAPFILE bs=1M count=2048
+
+# Set the correct permissions
+sudo chmod 600 $SWAPFILE
+
+# Format the file as swap
+sudo mkswap $SWAPFILE
+
+# Enable the swap file
+sudo swapon $SWAPFILE
+
+# Make the change permanent
+if ! grep -q "$SWAPFILE" /etc/fstab; then
+	echo "$SWAPFILE none swap sw 0 0" | sudo tee -a /etc/fstab
+fi
+
+echo "Swap file of ${SIZE_GB}G configured and enabled successfully."

@@ -1,0 +1,40 @@
+{
+  "ara": {
+    "dvm_path": "/auto/share/releases/sdk/ara2/demo_releases/standalone_demos/assets/llm/llm_generic_compilation_stage_r2.0_t1/qwen2_5_vl_3b_4k/model.dvm",
+    "inference_device": "ARA2",
+    "interface_ip_address": "127.0.0.1",
+    "interface_named_pipe": "//./pipe/proxy_pipe",
+    "interface_port": 5000,
+    "interface_socket_file": "/var/run/proxy.sock",
+    "interface_type": "SOCKET",
+    "vision_model_path": "/auto/share/releases/sdk/ara2/demo_releases/standalone_demos/assets/llm/llm_generic_compilation_stage_r2.0_t1/qwen2_5_vl_3b_4k/vision_encoder/model.dvm",
+    "embedding_table_path": "/auto/share/releases/sdk/ara2/demo_releases/standalone_demos/assets/llm/llm_generic_compilation_stage_r2.0_t1/qwen2_5_vl_3b_4k/vision_encoder/embed_tokens_qwen_vl_instruct.pt",
+    "embedding_table_shape": 152064,
+    "input_scale_path": "/auto/share/releases/sdk/ara2/demo_releases/standalone_demos/assets/llm/llm_generic_compilation_stage_r2.0_t1/qwen2_5_vl_3b_4k/precompiled/layer1-input_0_scale-1_input_dv.dat",
+    "rope_table_path": "/auto/share/releases/sdk/ara2/demo_releases/standalone_demos/assets/llm/llm_generic_compilation_stage_r2.0_t1/qwen2_5_vl_3b_4k/precompiled/layer2-rope_table-2_input_dv.dat"
+  },
+  "_name_or_path": "models/Qwen2.5-VL-7B",
+  "architectures": [
+    "Qwen2_5_VLForConditionalGeneration"
+  ],
+  "bos_token_id": 151643,
+  "eos_token_id": 151645,
+  "hidden_size": 3584,
+  "intermediate_size": 18944,
+  "max_position_embeddings": 128000,
+  "model_type": "ara_qwen_image",
+  "num_attention_heads": 28,
+  "num_hidden_layers": 28,
+  "num_key_value_heads": 4,
+  "use_cache": true,
+  "video_token_id": 151656,
+  "image_token_id": 151655,
+  "vision_config": {
+    "hidden_size": 1280,
+    "intermediate_size": 3420,
+    "model_type": "qwen2_5_image",
+    "num_heads": 16,
+    "patch_size": 14
+  },
+  "vocab_size": 152064
+}

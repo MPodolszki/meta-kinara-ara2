@@ -1,0 +1,19 @@
+[Unit]
+Description=Run rt-sdk-ara2 script at boot
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/share/rt-sdk-ara240/scripts/rt-sdk-ara2_pre.sh
+ExecStart=/bin/bash /usr/share/rt-sdk-ara240/scripts/rt-sdk-ara2_script.sh
+ExecStartPost=/bin/bash /usr/share/rt-sdk-ara240/scripts/rt-sdk-ara2_post.sh
+EnvironmentFile=-/run/ara240/env
+KillMode=control-group
+RemainAfterExit=true
+
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target
+

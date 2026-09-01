@@ -1,0 +1,2 @@
+# On vendor 1e58
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1e58", TAG+="systemd", ENV{SYSTEMD_WANTS}="rt-sdk-ara2.service"

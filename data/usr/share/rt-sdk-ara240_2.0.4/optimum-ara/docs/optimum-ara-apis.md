@@ -1,0 +1,45 @@
+# Optimum Ara APIs
+
+The customized Optimum Ara classes allow the model to appear like Hugging Face models while internally using a different inference engine, DV API. These classes are for models quantized for Ara device.
+
+Below is the list of Optimum Ara APIs:
+
+- [Optimum Ara APIs](#optimum-ara-apis)
+  - [AraModelForCausalLM](#aramodelforcausallm)
+  - [AraPretrainedConfig](#arapretrainedconfig)
+  - [AraGenerationConfig](#aragenerationconfig)
+
+## AraModelForCausalLM
+
+**AraModelForCausalLM** class is imported from `optimum.ara`. It is a generic model class that loads, generates tokens for the input prompt, and instantiates the model when created with the below listed class methods.
+
+- [`from_pretrained()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_model_for_causallm.mdx#from_pretrained)
+- [`generate()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_model_for_causallm.mdx#generate)
+- [`from_config()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_model_for_causallm.mdx#from_config)
+- [`save_config()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_model_for_causallm.mdx#save_config)
+
+To know more about APIs usage, refer [AraModelForCausalLM](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_model_for_causallm.mdx).
+
+## AraPretrainedConfig
+
+**AraPretrainedConfig** class is imported from `optimum.ara`. It is a base class that provides common methods to load or save a model configuration from a local file, directory, or a pretrained model configuration using the below listed APIs.
+
+- [`from_pretrained()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx#from_pretrained)
+- [`update_ara_dict_params()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx#update_ara_dict_params)
+- [`from_json_file()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx#from_json_file)
+- [`from_dict()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx#from_dict)
+- [`make_ara_config()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx#make_ara_config)
+
+To know more about APIs usage, refer [AraPretrainedConfig](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_pretrained_config.mdx).
+
+## AraGenerationConfig
+
+**AraGenerationConfig** class is imported from `optimum.ara`. **AraGenerationConfig** is a generate class for text generation that allows to change the parameters to control text generation, create and save a customized generation configuration using the below listed APIs.
+
+- [`make_ara_config()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx#make_ara_config)
+- [`from_pretrained()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx#from_pretrained)
+- [`to_json_string()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx#to_json_string)
+- [`from_json_file()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx#from_json_file)
+- [`from_model_config()`](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx#from_model_config)
+
+To know more about APIs usage, refer [AraGenerationConfig](https://github.com/KinaraAi/optimum-ara/blob/5285b9d5190cc8e3998f7c60bd006c64b89a3af1/docs/ara_generation_config.mdx).
