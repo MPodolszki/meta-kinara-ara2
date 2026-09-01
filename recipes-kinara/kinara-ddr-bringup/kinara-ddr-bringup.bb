@@ -57,8 +57,10 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 
-# The private .so files live outside the linker search path on purpose; they
-# are only ever loaded through the binary's RPATH.
+# This binary's DT_NEEDED entries carry a path, not a bare soname
+# ("libs/arm64/ddr_bin_gen.aarch64.so"), because the vendor links against the
+# bundle layout and resolves it via RPATH ".:libs/arm64". List both spellings
+# so the shlib code treats them as private.
 PRIVATE_LIBS:${PN} = " \
     ddr_bin_gen.aarch64.so \
     ddr_cfg_gen.aarch64.so \
@@ -67,7 +69,16 @@ PRIVATE_LIBS:${PN} = " \
     libftd2xx.so \
     libyaml-0.so \
     libyaml-0.so.2 \
+    libs/arm64/*.so* \
 "
+
+# INSANE_SKIP "file-rdeps" only silences the QA check -- rpmdeps still emits
+# per-file Requires, and dnf then fails do_rootfs with
+#   nothing provides libs/arm64/ddr_bin_gen.aarch64.so()(64bit)
+# because no package can ever provide a path-qualified soname. Skip file-level
+# dependency generation for this package entirely; everything it really needs
+# from the rest of the image is declared in RDEPENDS below.
+SKIP_FILEDEPS:${PN} = "1"
 
 RDEPENDS:${PN} += "libstdc++"
 
