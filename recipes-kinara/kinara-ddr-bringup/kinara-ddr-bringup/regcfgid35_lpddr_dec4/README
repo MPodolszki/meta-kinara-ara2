@@ -1,0 +1,87 @@
+//CFG35
+Derived from checked in KAU CFG31
+This test Case Written to match Before start part of KAU CFG31.bin
+CHANGES CFG35 VS CFG31
+PBR_MODE_EN = 1 vs 0
+CFG35 Should only be used with this test.
+
+// Dont Read from here. This is FOR CFG 31 - Preserved to CHECK THE DIFF in CFG31
+// NO GO ZONE
+1. This config is passing HULK board at 1066 on April-5,2024.
+
+
+CA BUS 4 loads (Lp4x)
+CS is point to point
+CK is 4 loads
+
+
+MR11 = 0x14 = 
+MR22 = 
+0 = > 4      
+1 = > 4
+2 = > 0x24   ODT CK disabled
+3 = > 0x14   ODT CS disabled
+4 = > 4  
+5 = > 14     ODT CS disabled
+6 = > 0x24   ODT CK disabled
+7 = > 0x4
+
+
+
+
+MR11 = 0x24 =  
+MR22 = 
+0 = > 0x2C  : Rank 1 CK and CK ODT disabled      
+1 = > 0x4   : CA,CK,CS terminated
+2 = > 0x4   : CA,CK,CS terminated
+3 = > 0x2C  : Rank 1 CK and CK ODT disabled  
+4 = > 0x4   : CA,CK,CS terminated  
+5 = > 0x2C  : Rank 1 CK and CK ODT disabled   
+6 = > 0x2C  : Rank 1 CK and CK ODT disabled  
+7 = > 0x4   : CA,CK,CS terminated
+
+CK/CA = 60 ohms
+CS = 120 ohms
+
+
+0 = > 0x4   : CA,CK,CS terminated     
+1 = > 0x2C  : Rank 1 CK and CK ODT disabled 
+2 = > 0x4   : CA,CK,CS terminated
+3 = > 0x2C  : Rank 1 CK and CK ODT disabled  
+4 = > 0x4   : CA,CK,CS terminated  
+5 = > 0x2C  : Rank 1 CK and CK ODT disabled   
+6 = > 0x4   : CA,CK,CS terminated 
+7 = > 0x2C  : Rank 1 CK and CK ODT disabled 
+
+
+
+//regcfgid30 15May
+Updated settings to adopt below termination scheme:
+CA has 2 loads
+CK has 2 loads
+CS is terminated for Rank 0 and Rank 1 (Point to point).
+
+
+//regcfgid31 31May Configs
+You said keeping PI_CS_MAP = 0x7.
+Is this a typo.
+
+What are F1 and F2 operating frequency 
+
+I see not all MR frequency copy are taken care in PI (some F1 MR register don't match to F2 values).
+Can you please set MR3, MR11,MR12,MR13,MR14 and MR22 in PI for F1 and F2 to same value.
+Ensure Controller MR parameters have same value as programmed in PI.
+Also set PI_CALVL_VREF_INITIAL_STOP_POINT_F1 / PI_CALVL_VREF_INITIAL_START_POINT_F1 to same value as F2.
+
+Once above changes are taken care,
+Can you please take register dump with (Keeping PI_FREQ_MAP = 0x7 and PI_INIT_WORK_FREQ = 1, INIT_FREQ =1)
+1. PHY_FREQ_SEL_INDEX = 0, take register dump
+2. PHY_FREQ_SEL_INDEX = 1, take register dump
+
+
+Firstly we need to ensure below settings can pass BIST and system level traffic.
+PI_FREQ_MAP = 0x7 and PI_INIT_WORK_FREQ = 1, INIT_FREQ (controller parameter) = 1
+PI_FREQ_MAP = 0x7 and PI_INIT_WORK_FREQ = 2, INIT_FREQ (controller parameter) = 2
+
+
+Can you also check what is the value of "lp_ext_resp[0]" after DFS operation is completed

@@ -1,0 +1,16 @@
+# Configuration for the Kinara Ara2 (Ara240) bring-up, read by
+# /usr/sbin/kinara-ara2-bringup.sh via uiodma-bind.service.
+#
+# DDR PLL level for the ddr_bringup_sf_600_1200_new_load_ctrl tool:
+#   KINARA_DDR_PLL=2  ->  900 MHz  (default)
+#   KINARA_DDR_PLL=3  -> 1066 MHz
+KINARA_DDR_PLL=2
+
+# DDR register set: regcfgid<ID>_lpddr_dec4 inside the bring-up bundle.
+KINARA_DDR_CFG_ID=35
+
+# Board profile passed to the bring-up tool.
+KINARA_BOARD_NAME=pytech
+
+# PCIe endpoint index.
+KINARA_EP=0

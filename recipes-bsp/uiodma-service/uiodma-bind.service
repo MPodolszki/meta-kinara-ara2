@@ -1,10 +1,11 @@
 [Unit]
-Description=Bind uiodma driver to Kinara PCIe device
+Description=Bind uiodma driver to Kinara Ara2 PCIe device and run DDR bring-up
 After=multi-user.target
 
 [Service]
 Type=oneshot
-ExecStart=sh /root/aarch64/hw_utils/startBoot.sh
+EnvironmentFile=-/etc/default/kinara-ara2
+ExecStart=/usr/sbin/kinara-ara2-bringup.sh
 
 [Install]
 WantedBy=multi-user.target
