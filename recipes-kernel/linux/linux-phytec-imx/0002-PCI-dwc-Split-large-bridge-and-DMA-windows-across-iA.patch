@@ -1,0 +1,106 @@
+From a6d4e883dc2e8237fe4389e83cfcb944644ce52d Mon Sep 17 00:00:00 2001
+From: m.podolszki@phytec.de
+Date: Wed, 15 Apr 2026 14:24:56 +0200
+Subject: [PATCH 2/2] PCI: dwc: Split large bridge and DMA windows across iATUs
+ (6.6 backport)
+
+---
+ .../pci/controller/dwc/pcie-designware-host.c | 66 +++++++++++++------
+ 1 file changed, 46 insertions(+), 20 deletions(-)
+
+diff --git a/drivers/pci/controller/dwc/pcie-designware-host.c b/drivers/pci/controller/dwc/pcie-designware-host.c
+index a7170fd0e..f660958c9 100644
+--- a/drivers/pci/controller/dwc/pcie-designware-host.c
++++ b/drivers/pci/controller/dwc/pcie-designware-host.c
+@@ -648,6 +648,10 @@ static int dw_pcie_iatu_setup(struct dw_pcie_rp *pp)
+ {
+ 	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
+ 	struct resource_entry *entry;
++	resource_size_t size;
++	resource_size_t res_size;
++	u64 cpu_addr;
++	u64 pci_addr;
+ 	int i, ret;
+ 
+ 	/* Note the very first outbound ATU is used for CFG IOs */
+@@ -671,17 +675,28 @@ static int dw_pcie_iatu_setup(struct dw_pcie_rp *pp)
+ 		if (resource_type(entry->res) != IORESOURCE_MEM)
+ 			continue;
+ 
+-		if (pci->num_ob_windows <= ++i)
+-			break;
++		cpu_addr = entry->res->start;
++		pci_addr = entry->res->start - entry->offset;
++		res_size = resource_size(entry->res);
+ 
+-		ret = dw_pcie_prog_outbound_atu(pci, i, PCIE_ATU_TYPE_MEM,
+-						entry->res->start,
+-						entry->res->start - entry->offset,
+-						resource_size(entry->res));
+-		if (ret) {
+-			dev_err(pci->dev, "Failed to set MEM range %pr\n",
+-				entry->res);
+-			return ret;
++		while (res_size) {
++			if (pci->num_ob_windows <= ++i)
++				return -ENOSPC;
++
++			size = min_t(resource_size_t, res_size,
++					     pci->region_limit + 1);
++
++			ret = dw_pcie_prog_outbound_atu(pci, i, PCIE_ATU_TYPE_MEM,
++							cpu_addr, pci_addr, size);
++			if (ret) {
++				dev_err(pci->dev, "Failed to set MEM range %pr\n",
++					entry->res);
++				return ret;
++			}
++
++			cpu_addr += size;
++			pci_addr += size;
++			res_size -= size;
+ 		}
+ 	}
+ 
+@@ -710,17 +725,28 @@ static int dw_pcie_iatu_setup(struct dw_pcie_rp *pp)
+ 		if (resource_type(entry->res) != IORESOURCE_MEM)
+ 			continue;
+ 
+-		if (pci->num_ib_windows <= i)
+-			break;
++		cpu_addr = entry->res->start;
++		pci_addr = entry->res->start - entry->offset;
++		res_size = resource_size(entry->res);
+ 
+-		ret = dw_pcie_prog_inbound_atu(pci, i++, PCIE_ATU_TYPE_MEM,
+-					       entry->res->start,
+-					       entry->res->start - entry->offset,
+-					       resource_size(entry->res));
+-		if (ret) {
+-			dev_err(pci->dev, "Failed to set DMA range %pr\n",
+-				entry->res);
+-			return ret;
++		while (res_size) {
++			if (pci->num_ib_windows <= i)
++				return -ENOSPC;
++
++			size = min_t(resource_size_t, res_size,
++					     pci->region_limit + 1);
++
++			ret = dw_pcie_prog_inbound_atu(pci, i++, PCIE_ATU_TYPE_MEM,
++						      cpu_addr, pci_addr, size);
++			if (ret) {
++				dev_err(pci->dev, "Failed to set DMA range %pr\n",
++					entry->res);
++				return ret;
++			}
++
++			cpu_addr += size;
++			pci_addr += size;
++			res_size -= size;
+ 		}
+ 	}
+ 
+-- 
+2.53.0
+

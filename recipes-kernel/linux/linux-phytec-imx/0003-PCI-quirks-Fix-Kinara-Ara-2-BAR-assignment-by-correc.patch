@@ -1,0 +1,48 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: augenblix <info@augenblix.de>
+Date: Wed, 23 Apr 2026 12:00:00 +0200
+Subject: [PATCH] PCI: quirks: Fix Kinara Ara-2 BAR assignment by correcting
+ device class
+
+The Kinara Ara-2 PCIe accelerator (1e58:0002) reports PCI class 0x000012
+(Non-VGA unclassified device, prog-if 0x12).  The kernel's PCI resource
+allocator in __dev_sort_resources() skips devices whose class >> 8 equals
+PCI_CLASS_NOT_DEFINED (0x0000), which means the device's BARs are never
+added to the allocation list and consequently never assigned addresses.
+
+Fix this by adding an early PCI fixup quirk that reclassifies the device
+as a Processing Accelerator (class 0x120000), which accurately describes
+the device's function and allows the normal BAR assignment flow to proceed.
+
+Without this fix, all three 64-bit prefetchable BARs (16K + 1M + 1M)
+remain at address 0 and the uiodma driver fails with:
+  "BAR 0: not claimed; can't enable device"
+
+Signed-off-by: augenblix <info@augenblix.de>
+---
+ drivers/pci/quirks.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/drivers/pci/quirks.c b/drivers/pci/quirks.c
+index 1234567890ab..fedcba987654 100644
+--- a/drivers/pci/quirks.c
++++ b/drivers/pci/quirks.c
+@@ -6200,3 +6200,17 @@ DECLARE_PCI_FIXUP_HEADER(PCI_VENDOR_ID_INTEL, 0x9a31,
+ #endif
++
++/*
++ * Kinara Ara-2 PCIe AI accelerator (1e58:0002) reports class 0x000012
++ * (Non-VGA unclassified, prog-if 0x12).  Since class >> 8 == 0x0000
++ * matches PCI_CLASS_NOT_DEFINED, __dev_sort_resources() in setup-bus.c
++ * skips the device entirely and its BARs are never assigned.
++ *
++ * Reclassify as Processing Accelerator (0x1200) so BARs get assigned
++ * normally.
++ */
++static void quirk_kinara_ara2_class(struct pci_dev *dev)
++{
++	dev_info(&dev->dev, "Kinara Ara-2: reclassifying from 0x%06x to Processing Accelerator\n",
++		 dev->class);
++	dev->class = PCI_CLASS_ACCELERATOR_PROCESSING << 8 | (dev->class & 0xff);
++}
++DECLARE_PCI_FIXUP_EARLY(0x1e58, 0x0002, quirk_kinara_ara2_class);
