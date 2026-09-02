@@ -58,6 +58,15 @@ do_install() {
 
     # Fix host UID/GID contamination - normalise all ownership to root
     chown -R root:root ${D}
+
+    # The vendor drop ships its directories 0700. That makes the tree
+    # unreadable for anything but root on target, and it also collides with
+    # kinara-ddr-bringup, which owns ${datadir}/${KINARA_SDK_TREE} and its
+    # hw_utils subdirectory at 0755 -- rpm rejects the same path packaged
+    # twice with different modes:
+    #   file /usr/share/rt-sdk-ara240_2.0.4 conflicts between attempted
+    #   installs of kinara-ara2-runtime and kinara-ddr-bringup
+    find ${D}${datadir}/${KINARA_SDK_TREE} -type d -exec chmod 0755 {} +
 }
 
 FILES:${PN} += " \
